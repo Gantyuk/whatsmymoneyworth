@@ -1,0 +1,352 @@
+.col-md-12,
+.col-md-3 {
+    padding: 0;
+}
+
+#mySidenav,
+#mySidenav2 {
+    height: 420px;
+}
+
+.sidenav,
+.sidenav2 {
+    position: static;
+}
+
+.sidenav2 {
+    float: right;
+    margin-right: 0px;
+}
+
+.top-nav-menu li {
+    display: inline-block;
+}
+
+.blue-color {
+    color: #337ab7;
+}
+
+.mar-top-10 { margin-top: 10px; }
+
+.mar-top-20 { margin-top: 20px; }
+
+.mar-top-30 { margin-top: 30px; }
+
+.mar-top-40 { margin-top: 40px; }
+
+.mar-top-50 { margin-top: 50px; }
+
+.font-bold { font-weight: bold; }
+
+.padding-top-50 { padding-top: 50px; }
+
+.padding-top-70 { padding-top: 70px; }
+
+.padding-right-40{ padding-right: 40px; }
+
+.top-img {
+    margin: auto;
+    /*margin-top: 50px;*/
+    margin-bottom: 20px;
+}
+
+.silver-color{
+    background-color: rgba(211, 211, 211, 0.2);    
+}
+
+.silver-background {
+    background-color: rgba(211, 211, 211, 0.2);
+    height: 100%;
+    width: 316px;
+}
+
+.chitikaAdContainer {
+    overflow: hidden;
+}
+
+#title {
+    font-size: 20pt;
+}
+
+.sharethis-inline-share-buttons {
+    margin-bottom: 14pt;
+}
+
+.calculate-worldwide{
+    font-size: 18px;
+}
+
+.amount-money {
+    height: 30px;
+}
+
+.what-are{
+    margin-top: 20px;
+}
+
+#chitikaAdBlock-0, #chitikaAdBlock-1{
+    background-color: rgba(211, 211, 211, 0.2);
+    margin-top: -200px;
+}
+
+.bottom-ad-2{
+    width: 958px;
+}
+
+/*#chitikaAdBlock-1{
+    padding-left: 37px;
+}
+*/
+
+
+#ch_ad0-0{
+    margin-left: -30px !important;
+}
+
+#ch_ad1-0{
+    padding-right: 60px !important;
+}
+
+
+#st-1.st-has-labels .st-btn.st-remove-label {
+    min-width: 25px !important;
+}
+
+#st-1.st-has-labels .st-btn {
+    min-width: 25px !important;
+}
+
+
+@media (min-width: 992px) {
+    .col-md-3-a{
+        width: 21%;
+    }
+
+    .col-md-6-a{
+        width: 58%;
+    }
+
+
+
+    .worth-in{
+        padding-bottom: 20px;
+        padding-top: 50px;
+    }
+
+    .what-are{
+        margin-top: 330px;
+    }
+
+    .flagstrap{
+        margin-bottom: 20px;
+    }
+
+    #mySidenav, #mySidenav2 {
+        /*height: 615px;*/
+    }    
+
+
+}
+
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 1023px) {
+
+
+
+    #chitikaAdBlock-1{
+        padding-left: 0px;
+    }
+
+    .padding-left-50{
+        padding-left: 50px;
+    }
+
+    .amazon-wrapper{
+        margin-top: 1050px;
+        margin-bottom: 300px;
+    }
+
+    #mySidenav, #mySidenav2 {
+        height: 480px;
+    }
+
+    #chitikaAdBlock-0, #chitikaAdBlock-1 {
+        margin-top: -240px;
+    }
+
+    .amazon-wrapper{
+        margin-top: 1000px;
+    }
+
+
+    .st-btn {
+        min-width: 20px !important;
+        height: 20px !important;
+        width: 20px !important;
+        
+    }
+
+
+    #st-1 .st-btn > svg {
+        top: 0px !important;
+        left: -10px !important;
+    }    
+
+    
+}
+
+.amzn-native-content {
+    width: 100%;
+}
+
+
+.amzn-native-product{
+
+}
+
+div#amzn-native-ad-0{
+    max-width: 100% !important;
+}
+
+.top-img{
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+
+/*
+@media only screen and (min-device-width: 300px) and (max-device-width: 1023px) {
+
+    #mySidenav,
+    #mySidenav2 {
+        height: 750px;
+    }
+
+
+    .sidenav button, .sidenav2 button{
+        width: 100%;
+        height: 110px;
+        font-size: 36px;
+    }
+
+    .top-nav-menu{
+        margin-top: 90px;
+        font-size: 32px;
+    }
+
+
+    #title {
+        font-size: 40px;
+    }
+
+    .calculate-worldwide{
+        font-size: 24px;
+        margin-top: 40px;
+    }
+
+    .what-are{
+        margin-top: 2350px;
+        padding-bottom: 60px;
+        font-size: 36px;
+    }
+
+
+    .chit-wrap {
+        padding-left: 35%;
+    }
+    .amazon-adsystem {
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+    }
+    .chitikaAdBlock-1 {
+        padding-bottom: 100px;
+    }
+    .amazon-wrapper {
+        margin-top: 150px !important;
+        margin-left: 5px !important;
+    }
+
+    .amount-money {
+        margin-top: 70px;
+        margin-bottom: 50px;
+        width: 50%;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .flagstrap button{
+        height: 70px;
+        width: 50%;
+        font-size: 26px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+    }
+
+    #interest_countries_option{
+        margin-bottom: 40px;
+    }
+
+    .button-small{
+        width: 50%;
+        height: 70px;
+        font-size: 26px;
+
+    }
+
+    .click-here{
+        font-size: 26px;
+        margin-top: 60px;                 
+    }
+
+    .ensure-text{
+        font-size: 26px;
+        margin-top: 60px;         
+        margin-bottom: 60px;         
+    }
+
+
+
+     #chitikaAdBlock-1{
+        margin-top: 170px !important;
+    }
+
+    .paypal-but-wrap img{
+        width: 40%;
+    }
+
+    #st-1.st-has-labels .st-btn {
+        min-width: 135px;
+        height: 70px;
+        width: 70px;
+        
+    }
+
+    #st-1.st-has-labels .st-btn svg {
+        margin-top: 13px;
+    }
+
+    .top-img{
+        height: 200px;
+        width: 200px;
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+    .sharethis-inline-share-buttons {
+        padding-left: 50px;
+    }
+
+}
+
+@media screen and (min-width: 960px) {
+
+    .amazon-wrapper {
+        margin-top: 650px;
+    }
+}
+
+
+
+*/
