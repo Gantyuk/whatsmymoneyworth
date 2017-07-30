@@ -66,7 +66,9 @@ a:hover, a:visited, a:link, a:active
 #resultMessage {
     text-align: center;
 }
-
+#resultMessage .left_buton_reset{
+    float: left;
+}
 .flagstrap.interest-country:after {
     content: "";
     text-align: right;
@@ -204,5 +206,6 @@ border:none;
     .sidenav2 {padding-top: 15px;}
     .sidenav2 a {font-size: 18px;}
 } 
+
 
 
