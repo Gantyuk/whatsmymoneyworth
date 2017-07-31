@@ -449,6 +449,7 @@ $(document).ready(function () {
                 if (val['Country'] == contry_city1){
                     $("#select1").append("<option>"+key+"</option>");
                 }});
+            $('#contry_1').html(contry_city1);
         }
     });
 
@@ -460,6 +461,7 @@ $(document).ready(function () {
         if (val['Country'] == contry_city1){
             $("#select1").append("<option>"+key+"</option>");
         }});
+    $('#contry_1').html(contry_city1);
 
 
     var country2,contry_city2;
@@ -484,7 +486,7 @@ $(document).ready(function () {
                 if (val['Country'] == contry_city2){
                     $("#select2").append("<option>"+key+"</option>");
                 }});
-            $('#contry_1').html(contry_city2);
+            $('#contry_2').html(contry_city2);
         }
     });
 
@@ -495,7 +497,7 @@ $(document).ready(function () {
         if (val['Country'] == contry_city1){
             $("#select2").append("<option>"+key+"</option>");
         }});
-    $('#contry_1').html(contry_city2);
+    $('#contry_2').html(contry_city2);
 
     $('form').submit(function (e) {
         e.preventDefault();
