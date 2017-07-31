@@ -140,6 +140,20 @@ a:hover, a:visited, a:link, a:active
     margin-top:0.3em;
 }
 
+#result{
+    padding: 21px;
+    margin-top: -10px;
+    margin-left: 4%;
+    border-radius: 12px;
+}
+#reset{
+    padding: 11px;
+    margin-top: -14px;
+    margin-right: 3%;
+    border-color: #090909;
+    color: white;
+    border-radius: 12px;
+}
 
 
 

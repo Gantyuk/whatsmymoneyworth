@@ -137,7 +137,7 @@ $(document).ready(function() {
                     if (country1 == 'US' || country1 == 'NL') {
                         the = 'the ';
                     }
-                    var message = "At this moment you can buy with <b>" + amount + " " + currency1_name + "</b> " + "about as much in " + countries[country2] + " as you could buy with about <div class='text-center'><span class='koef-ppp'>" + response.result + "  " + currency_symbol + '<a href="#" data-toggle="tooltip"data-html="true" data-placement="right" title="Explained: We convert the amount to local currency and divide by the so-called „PPP-Factor“ (Purchasing Power Parity), issued by the International Monetary Fund. This returns an amount in Dollars that has the same purchasing power in the USA as the originally entered amount would have in the foreign country’s currency; we then finally multiply this amount with the PPP of your country, which returns the amount in your currency that equals the purchasing power of the calculatory Dollar amount"><b>?</b></a></span></div><br> in ' + the + countries[country1] + ".";
+                    var message = "At this moment you can buy with <b>" + amount + " " + currency1_name + "</b> " + "about as much in " + countries[country2] + " as you could buy with about <div class='text-center'> <button id=\"reset\" class=\"btn btn-primary\"disabled=\"disabled\">Reset to avetage <br>value</button><span class='koef-ppp'>" + response.result + "  " + currency_symbol + '<a href="#" data-toggle="tooltip"data-html="true" data-placement="right" title="Explained: We convert the amount to local currency and divide by the so-called „PPP-Factor“ (Purchasing Power Parity), issued by the International Monetary Fund. This returns an amount in Dollars that has the same purchasing power in the USA as the originally entered amount would have in the foreign country’s currency; we then finally multiply this amount with the PPP of your country, which returns the amount in your currency that equals the purchasing power of the calculatory Dollar amount"><b>?</b></a></span><button id=\"result\" class=\"btn btn-primary\">Specify Result</button></div><br> in ' + the + countries[country1] + ".";
                     $('#resultMessage').html(message);
                     
                 }
@@ -150,5 +150,9 @@ $(document).ready(function() {
             }
         });
     });
+ 
+});
 
+$("#result").click(function(){
+    $(this).console.log("uhgjhfghj");
 });
