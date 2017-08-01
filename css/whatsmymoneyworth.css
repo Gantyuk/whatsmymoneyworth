@@ -2,41 +2,47 @@
     margin: 0;
     padding: 0;
 }
-.clear {clear: both;}
+
+.clear {
+    clear: both;
+}
 
 .main {
     position: relative;
 }
+
 .header {
     position: absolute;
     top: 0;
     left: 50%;
     margin-top: 20px;
 }
+
 .selector {
     position: absolute;
     top: 50%;
     left: 50%;
 }
 
-a:hover, a:visited, a:link, a:active
-{
+a:hover, a:visited, a:link, a:active {
     text-decoration: none;
 }
 
 .text {
-    text-align: center; margin-top: 30px;
-}
-.label_user {
-/*    cursor: help;*/
+    text-align: center;
+    margin-top: 30px;
 }
 
-#options > button, #country2 > button  { 
+.label_user {
+    /*    cursor: help;*/
+}
+
+#options > button, #country2 > button {
     border-radius: 7px;
 }
 
 .koef-ppp {
-	display: inline-block;
+    display: inline-block;
     position: relative;
     border: 1px solid #000;
     border-radius: 7px;
@@ -45,12 +51,13 @@ a:hover, a:visited, a:link, a:active
     margin: 10px;
     color: #00f;
 }
+
 .koef-ppp > a {
-	position: absolute;
+    position: absolute;
     right: 0;
     color: #00f;
-	
-	padding: 5px 8px;
+
+    padding: 5px 8px;
     margin-top: -6px;
     margin-right: -1px;
     border: 1px solid black;
@@ -60,15 +67,17 @@ a:hover, a:visited, a:link, a:active
 .tooltip-inner {
     max-width: 350px;
     /* If max-width does not work, try using width instead */
-    width: 350px; 
+    width: 350px;
 }
 
 #resultMessage {
     text-align: center;
 }
-#resultMessage .left_buton_reset{
+
+#resultMessage .left_buton_reset {
     float: left;
 }
+
 .flagstrap.interest-country:after {
     content: "";
     text-align: right;
@@ -86,139 +95,157 @@ a:hover, a:visited, a:link, a:active
     font-size: 12px;
 }
 
-
-#title{
+#title {
 
     font-weight: 700;
 }
 
-
-
 /*SideNav 1*/
 
- /* The side navigation menu */
+/* The side navigation menu */
 .sidenav {
     height: 100%;
     /*width: 304px; */
-    position: absolute; 
-    overflow-x: hidden; 
-    background-color:rgba(211, 211, 211, 0.2);
+    position: absolute;
+    overflow-x: hidden;
+    background-color: rgba(211, 211, 211, 0.2);
 }
 
-.sidenav h1{
+.sidenav h1 {
 
     text-align: center;
-    color:white;
+    color: white;
     background-color: #337cb8;
-    position:relative;
-    bottom:20px;
-    padding-bottom:10px;
-    padding-top:10px;
-    margin-bottom:0.5em;
-    
+    position: relative;
+    bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0.5em;
+
 }
 
 /* The navigation menu links */
 .sidenav button {
 
-    
-    border:none;
-    background-color:rgba(211, 211, 211, 0.2);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);    
-    width:250px;
-    min-height:50px;
-    /*font-size: 1.4rem;*/
-    font-weight:700;
-    text-align: center;
-    color: #337cb7;
-    display: block;
-
-    position:relative;
-    bottom:30px;
-    /*max-width:300px;*/
-    margin: 0 auto;
-    margin-top:0.3em;
-}
-
-#result{
-    padding: 21px;
-    margin-top: -10px;
-    margin-left: 4%;
-    border-radius: 12px;
-}
-#reset{
-    padding: 11px;
-    margin-top: -14px;
-    margin-right: 3%;
-    border-color: #090909;
-    color: white;
-    border-radius: 12px;
-}
-
-
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-} 
-
-
-
-
-/*SideNav 2 */
-
- /* The side navigation menu */
-.sidenav2 {
-    height: 100%;
-    /*width: 304px;*/ 
-    position: absolute; 
-    right:0;
-    overflow-x: hidden; 
-    background-color:rgba(211, 211, 211, 0.2);
-}
-
-.sidenav2 h1{
-
-    text-align: center;
-    color:white;
-    background-color:#337cb8;
-    position:relative;
-    bottom:20px;
-    padding-bottom:10px;
-    padding-top:10px;
-    
-}
-
-/* The navigation menu links */
-.sidenav2 button {
-
-border:none;
-    background-color:rgba(211, 211, 211, 0.2);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);    
-    width:250px;
-    min-height:50px;
+    border: none;
+    background-color: rgba(211, 211, 211, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 250px;
+    min-height: 50px;
     /*font-size: 1.4rem;*/
     font-weight: 700;
     text-align: center;
     color: #337cb7;
     display: block;
 
-    position:relative;
-    bottom:30px;
+    position: relative;
+    bottom: 30px;
     /*max-width:300px;*/
     margin: 0 auto;
-    margin-top:0.3em;
-
+    margin-top: 0.3em;
 }
 
+#result {
+    padding: 21px;
+    margin-top: -109px;
+    margin-right: 5%;
+    border-radius: 12px;
+    float: right;
+}
 
+#reset {
+    padding: 11px;
+    margin-top: -174px;
+    margin-left: 5%;
+    border-color: #090909;
+    color: white;
+    border-radius: 12px;
+}
 
+.open > .dropdown-menu {
+    margin-top: -333px;
+    margin-left: 50%;
+}
+
+#select1, #select2 {
+    margin-bottom: 15px;
+}
+
+#select1 option, #select2 option {
+    background-color: white;
+    color: #0f0f0f;
+}
+
+#go {
+    margin: 5%;
+}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav2 {padding-top: 15px;}
-    .sidenav2 a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+/*SideNav 2 */
+
+/* The side navigation menu */
+.sidenav2 {
+    height: 100%;
+    /*width: 304px;*/
+    position: absolute;
+    right: 0;
+    overflow-x: hidden;
+    background-color: rgba(211, 211, 211, 0.2);
+}
+
+.sidenav2 h1 {
+
+    text-align: center;
+    color: white;
+    background-color: #337cb8;
+    position: relative;
+    bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+/* The navigation menu links */
+.sidenav2 button {
+
+    border: none;
+    background-color: rgba(211, 211, 211, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 250px;
+    min-height: 50px;
+    /*font-size: 1.4rem;*/
+    font-weight: 700;
+    text-align: center;
+    color: #337cb7;
+    display: block;
+
+    position: relative;
+    bottom: 30px;
+    /*max-width:300px;*/
+    margin: 0 auto;
+    margin-top: 0.3em;
+
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav2 {
+        padding-top: 15px;
+    }
+
+    .sidenav2 a {
+        font-size: 18px;
+    }
 } 
 
 

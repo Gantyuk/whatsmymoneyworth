@@ -8,10 +8,10 @@
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
             a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
+                m = s.getElementsByTagName(o)[0];
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
@@ -252,16 +252,29 @@
 
 
         <div id="resultMessage"></div>
-        <div id="spesifay">
-            Chose city in <span id="contry_1"></span> : <select id ="select1">
-                <option>Peas select the city</option>
+        <button id="reset" class=" btn btn-primary hidden" disabled="disabled">Reset to avetage <br>value</button>
+        <a id="result" class="btn btn-primary hidden">Specify Result</a>
+        <div id="spesifay" class=" text-center  hidden">
+            Chose city in <span id="contry_1"></span> :
+            <select id="select1" class="btn btn-primary">
+                <option>No city, use national average</option>
             </select><br>
             Chose city in <span id="contry_2"></span> :
-            <select id ="select2">
-                <option>Peas select the city</option>
+            <select id="select2" class="btn btn-primary">
+                <option>No city, use national average</option>
             </select>
+
+            <p><b> Here you can select an expense type of interest. You can tick one box, multiple boxes or no box at
+                all.</b></p>
+            <label class="checkbox-inline"><input type="checkbox" name="Rent" value="Rent">Rent</label>
+            <label class="checkbox-inline"><input type="checkbox" name="Property" value="Property">Property</label>
+            <label class="checkbox-inline"><input type="checkbox" name="Groceries" value="Groceries">Groceries</label>
+            <label class="checkbox-inline"><input type="checkbox" name="Gastro/ Recreation" value="Gastro/ Recreation">Gastro/ Recreation</label>
+            <label class="checkbox-inline"><input type="checkbox" name="Technology" value="Technology">Technology</label>
+            <br>
+            <button id="go" class="btn btn-primary">Go</button>
             <!--<div class="flagstrap" id="user_city_option" data-input-name="city1"-->
-                 <!--data-button-size="btn-sm" data-selected-country="US" data-scrollable-height="350px"></div>-->
+            <!--data-button-size="btn-sm" data-selected-country="US" data-scrollable-height="350px"></div>-->
 
         </div>
 

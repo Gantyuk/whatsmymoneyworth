@@ -404,7 +404,7 @@ $.ajaxSetup({
     async: true
 });
 //console.log(city);
-
+var pp_rezult;
 $(document).ready(function () {
 
     var user_coutries_data = {};
@@ -444,7 +444,7 @@ $(document).ready(function () {
 
             contry_city1 = countries[country1];
 
-            $("#select1").html(" <option>Peas select the city</option>");
+            $("#select1").html(" <option>No city, use national average</option>");
             $.each(city, function (key, val) {
                 if (val['Country'] == contry_city1){
                     $("#select1").append("<option>"+key+"</option>");
@@ -466,7 +466,7 @@ $(document).ready(function () {
 
     var country2,contry_city2;
     $('#interest_countries_option').flagStrap({
-        countries: countries,
+        countries: user_coutries_data,
         buttonSize: "btn-sm",
         buttonType: "btn-primary",
         labelMargin: "10px",
@@ -481,7 +481,7 @@ $(document).ready(function () {
             console.log("This is the selected country code: " + country2);
             contry_city2 = countries[country2];
 
-            $("#select2").html(" <option>Peas select the city</option>");
+            $("#select2").html(" <option>No city, use national average</option>");
             $.each(city, function (key, val) {
                 if (val['Country'] == contry_city2){
                     $("#select2").append("<option>"+key+"</option>");
@@ -489,7 +489,10 @@ $(document).ready(function () {
             $('#contry_2').html(contry_city2);
         }
     });
+    $('#result').click(function () {
+        $('#spesifay').removeClass("hidden");
 
+    })
     country2 = $("#interest_countries_option > select").children("option[selected=selected]").val();
     contry_city2 = countries[country2];
 
@@ -501,6 +504,9 @@ $(document).ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault();
+        $('#reset').addClass("hidden");
+        $('#result').addClass("hidden");
+        $('#spesifay').addClass("hidden");
 
         var cur1 = countries_curency[country1];
         //var coutry_name1 = coutries_select_2[country1];
@@ -544,15 +550,80 @@ $(document).ready(function () {
                     if (country1 == 'US' || country1 == 'NL') {
                         the = 'the ';
                     }
-                    var message = "At this moment you can buy with <b>" + amount + " " + currency1_name + "</b> " + "about as much in " + countries[country2] + " as you could buy with about <div class='text-center'> <button id=\"reset\" class=\"btn btn-primary\"disabled=\"disabled\">Reset to avetage <br>value</button><span class='koef-ppp'>" + response.result + "  " + currency_symbol + '<a href="#" data-toggle="tooltip"data-html="true" data-placement="right" title="Explained: We convert the amount to local currency and divide by the so-called „PPP-Factor“ (Purchasing Power Parity), issued by the International Monetary Fund. This returns an amount in Dollars that has the same purchasing power in the USA as the originally entered amount would have in the foreign country’s currency; we then finally multiply this amount with the PPP of your country, which returns the amount in your currency that equals the purchasing power of the calculatory Dollar amount"><b>?</b></a></span><button id=\"result\" class=\"btn btn-primary\">Specify Result</button></div><br> in ' + the + countries[country1] + ".";
+                    var message = "At this moment you can buy with <b>" + amount + " " + currency1_name + "</b> " + "about as much in " + countries[country2] + " as you could buy with about <div class='text-center'> <span class='koef-ppp'>" + response.result + "  " + currency_symbol + '<a href="#" data-toggle="tooltip" data-html="true" data-placement="right" title="Explained: We convert the amount to local currency and divide by the so-called „PPP-Factor“ (Purchasing Power Parity), issued by the International Monetary Fund. This returns an amount in Dollars that has the same purchasing power in the USA as the originally entered amount would have in the foreign country’s currency; we then finally multiply this amount with the PPP of your country, which returns the amount in your currency that equals the purchasing power of the calculatory Dollar amount"><b>?</b></a></span></div><br> in ' + the + countries[country1] + ".";
                     $('#resultMessage').html(message);
-
+                    pp_rezult = response.result;
+                    $('#reset').removeClass("hidden");
+                    $('#result').removeClass("hidden");
                 }
                 else {
                     $('#resultMessage').html(response.result);
                     console.log(response.result);
                 }
+                var result;
+                $('#go').click(function () {
+                    if($('#select1').val()=='No city, use national average'){
+                        if($('#select2').val()=='No city, use national average') {
+                            alert("No city, use national average!!!");
+                        }
+                        else {
+                            result = country[contry_city2]['Cost of Living Plus Rent Index']/city[$('#select2').val()]['Cost of Living Plus Rent Index']*pp_rezult;
+                            $('.koef-ppp').html(result.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                            $("[data-toggle=tooltip]").tooltip();
+                        }
+                    }
+                    else {
+                        if($('#select2').val()=='No city, use national average') {
+                            var a = country[contry_city1]['Cost of Living Plus Rent Index']/city[$('#select1').val()]['Cost of Living Plus Rent Index']*amount;
 
+
+                            $.ajax({
+                                url: 'calc.php',
+                                data: {
+                                    currency1: cur1,
+                                    user_country_ppp: country1,
+                                    currency2: cur2,
+                                    interest_country_ppp: country2,
+                                    amount: a.toFixed(2)
+                                },
+                                type: 'POST',
+                                success: function (json) {
+                                    var response1 = jQuery.parseJSON(json);
+                                    if (response1.status == '1') {
+                                        $('.koef-ppp').html(response1.result + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                                        $("[data-toggle=tooltip]").tooltip();
+                                    }
+                                }
+                            });
+
+                        } else{
+                            var a = country[contry_city1]['Cost of Living Plus Rent Index']/city[$('#select1').val()]['Cost of Living Plus Rent Index']*amount;
+                            var b;
+                            $.ajax({
+                                url: 'calc.php',
+                                data: {
+                                    currency1: cur1,
+                                    user_country_ppp: country1,
+                                    currency2: cur2,
+                                    interest_country_ppp: country2,
+                                    amount: a.toFixed(2)
+                                },
+                                type: 'POST',
+                                success: function (json) {
+                                    var response2 = jQuery.parseJSON(json);
+                                    if (response2.status == '1') {
+                                        b=response2.result;
+                                        result = country[contry_city2]['Cost of Living Plus Rent Index']/city[$('#select2').val()]['Cost of Living Plus Rent Index']*b;
+                                        $('.koef-ppp').html(result.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                                        $("[data-toggle=tooltip]").tooltip();
+                                    }
+                                }
+                            });
+                        }
+
+                    }
+
+                });
                 $("[data-toggle=tooltip]").tooltip();
             }
         });
