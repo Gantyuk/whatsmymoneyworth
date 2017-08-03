@@ -240,18 +240,17 @@
     <div class="col-md-6 col-md-6-a col-sm-6 col-xs-6">
 
         <div id="resultMessage"></div>
-        <button id="reset" class=" btn btn-primary hidden" disabled="disabled">Reset to avetage <br>value</button>
         <a id="result" class="btn btn-primary hidden">Specify Result</a>
         <div id="spesifay" class=" text-center  hidden">
-            Chose city in <span id="contry_1"></span> :
-            <select id="select1" class="btn btn-primary">
-                <option>No city, use national average</option>
-            </select><br>
-            Chose city in <span id="contry_2"></span> :
-            <select id="select2" class="btn btn-primary">
-                <option>No city, use national average</option>
-            </select>
-
+            <div class="text-right"> Chose city in <span id="contry_1"></span> :
+                <select id="select1" class="btn btn-primary">
+                    <option>No city, use national average</option>
+                </select><br>
+                Chose city in <span id="contry_2"></span> :
+                <select id="select2" class="btn btn-primary">
+                    <option>No city, use national average</option>
+                </select>
+            </div>
             <p><b> Here you can select an expense type of interest. You can tick one box, multiple boxes or no box at
                 all.</b></p>
             <label class="checkbox-inline"><input type="checkbox" id="Rent" value="Rent">Rent</label>
@@ -309,7 +308,8 @@
             }
             if (window.CHITIKA === undefined) {
                 window.CHITIKA = {'units': []};
-            };
+            }
+            ;
             var unit = {
                 "calltype": "async[2]",
                 "publisher": "Crizzly",

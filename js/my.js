@@ -21,7 +21,7 @@ $.getJSON("countries_curency.json", function (data) {
 $.getJSON("City.json", function (data) {
     city = data;
 });
-
+var flag_reset = 0;
 var pp_rezult;
 $(document).ready(function () {
 
@@ -59,6 +59,11 @@ $(document).ready(function () {
             country1 = $(element).children("option[selected=selected]").val(); //This is the correct value
 
             console.log("This is the selected country code: " + country1);
+
+            if (flag_reset == 1) {
+                $('#submiting').trigger('click');
+                flag_reset = 0;
+            }
 
             contry_city1 = countries[country1];
 
@@ -101,6 +106,11 @@ $(document).ready(function () {
             console.log("This is the selected country code: " + country2);
             contry_city2 = countries[country2];
 
+            if (flag_reset == 1) {
+                $('#submiting').trigger('click');
+                flag_reset = 0;
+            }
+
             $("#select2").html(" <option>No city, use national average</option>");
             $.each(city, function (key, val) {
                 if (val['Country'] == contry_city2) {
@@ -126,7 +136,6 @@ $(document).ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault();
-        $("#reset").prop("disabled", true).addClass("hidden");
         $('#select1').val('No city, use national average');
         $('#select2').val('No city, use national average');
         $('#result').addClass("hidden");
@@ -180,7 +189,6 @@ $(document).ready(function () {
                     var message = "At this moment you can buy with <b>" + amount + " " + currency1_name + "</b> " + "about as much in " + countries[country2] + " as you could buy with about <div class='text-center'> <span class='koef-ppp'>" + response.result + "  " + currency_symbol + '<a href="#" data-toggle="tooltip" data-html="true" data-placement="right" title="Explained: We convert the amount to local currency and divide by the so-called „PPP-Factor“ (Purchasing Power Parity), issued by the International Monetary Fund. This returns an amount in Dollars that has the same purchasing power in the USA as the originally entered amount would have in the foreign country’s currency; we then finally multiply this amount with the PPP of your country, which returns the amount in your currency that equals the purchasing power of the calculatory Dollar amount"><b>?</b></a></span></div><br> in ' + the + countries[country1] + ".";
                     $('#resultMessage').html(message);
                     pp_rezult = response.result;
-                    $('#reset').removeClass("hidden");
                     $('#result').removeClass("hidden");
                 }
                 else {
@@ -190,11 +198,9 @@ $(document).ready(function () {
 
                 var result;
                 $('#go').click(function () {
-                    $("#reset").prop("disabled", false);
                     if ($('#select1').val() == 'No city, use national average') {
                         if ($('#select2').val() == 'No city, use national average') {
                             if ($("#Rent").prop("checked") != true && $("#Groceries").prop("checked") != true && $("#Property").prop("checked") != true && $("#Recreation").prop("checked") != true && $("#Technology").prop("checked") != true) {
-                                $("#reset").prop("disabled", true);
                                 alert("No city, use national average!!!");
                             }
                         }
@@ -298,12 +304,66 @@ $(document).ready(function () {
                         $('.koef-ppp').html(result.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     $("[data-toggle=tooltip]").tooltip();
+                    flag_reset = 1;
                 });
                 $("[data-toggle=tooltip]").tooltip();
+
             }
         });
     });
-    $("#reset").click(function () {
-        $('#submiting').trigger('click');
+
+    $('.amount-money').on('keyup', function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $("#Rent").click(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $("#Groceries").click(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $("#Property").click(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $("#Recreation").click(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $("#Technology").click(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $("#user_countries_option").change(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $('#select2').change(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
+    });
+    $('#select1').change(function () {
+        if (flag_reset == 1) {
+            $('#submiting').trigger('click');
+            flag_reset = 0;
+        }
     });
 });
