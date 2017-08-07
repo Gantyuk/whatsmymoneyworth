@@ -8,10 +8,10 @@
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
             a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
+                m = s.getElementsByTagName(o)[0];
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
@@ -241,6 +241,13 @@
 
         <div id="resultMessage"></div>
         <a id="result" class="btn btn-primary hidden">Specify Result</a>
+        <div class="text-center" id="text_result"></div>
+        <div class="text-center hidden" id="text_after">
+            <p><b>This is a national average value throughout cities and expense types. Slide over the question<br>mark
+                in the result box for more info.</b></p>
+            <p><b>To specify your result by cities and expense types, please click the “Specify Result” button
+                above.</b></p>
+        </div>
         <div id="spesifay" class=" text-center  hidden">
             <div class="text-right"> Chose city in <span id="contry_1"></span> :
                 <select id="select1" class="btn btn-primary">
@@ -261,6 +268,7 @@
             <label class="checkbox-inline"><input type="checkbox" id="Technology" value="Technology">Technology</label>
             <br>
             <button id="go" class="btn btn-primary">Go</button>
+            <p><b> Result amended!</b></p>
             <!--<div class="flagstrap" id="user_city_option" data-input-name="city1"-->
             <!--data-button-size="btn-sm" data-selected-country="US" data-scrollable-height="350px"></div>-->
 

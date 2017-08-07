@@ -122,6 +122,15 @@ $(document).ready(function () {
     });
     $('#result').click(function () {
         $('#spesifay').removeClass("hidden");
+        $('#text_after').addClass('hidden');
+        $('#text_result').addClass('hidden');
+        $('#select1').val('No city, use national average');
+        $('#select2').val('No city, use national average');
+        $("#Rent").prop("checked", false);
+        $("#Recreation").prop("checked", false);
+        $("#Property").prop("checked", false);
+        $("#Groceries").prop("checked", false);
+        $("#Technology").prop("checked", false);
 
     })
     country2 = $("#interest_countries_option > select").children("option[selected=selected]").val();
@@ -136,6 +145,8 @@ $(document).ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault();
+        $('#text_result').addClass('hidden');
+        $('#text_after').addClass('hidden');
         $('#select1').val('No city, use national average');
         $('#select2').val('No city, use national average');
         $('#result').addClass("hidden");
@@ -190,6 +201,7 @@ $(document).ready(function () {
                     $('#resultMessage').html(message);
                     pp_rezult = response.result;
                     $('#result').removeClass("hidden");
+                    $('#text_after').removeClass('hidden');
                 }
                 else {
                     $('#resultMessage').html(response.result);
@@ -297,73 +309,24 @@ $(document).ready(function () {
                         cked_res = groceries;
                     }
 
-                    if ($("#Rent").prop("checked") == true || $("#Groceries").prop("checked") == true || $("#Property").prop("checked") == true || $("#Recreation").prop("checked") == true || $("#Technology").prop("checked") == true) {
+                    if ($("#Rent").prop("checked") == true || $("#Groceries").prop("checked") == true || $("#Recreation").prop("checked") == true) {
                         $('.koef-ppp').html(cked_res.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     else {
+                        console.log(result);
                         $('.koef-ppp').html(result.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     $("[data-toggle=tooltip]").tooltip();
-                    flag_reset = 1;
+                    $('#text_result').html("<p><b>This is a weighed result, taking into account the expense types " +  currencies[cur1]["symbol"] + ", " + currencies[cur2]["symbol"] + " and " + amount + " as well as the </b></p>"+
+                        "<p><b>local price indices of "+$('#select1').val()+" and "+$('#select2').val()+".<br> </b></p><p><b>For more info, please slide over the question mark in the result box.</b></p>");
+                    $('#text_result').removeClass('hidden');
+                    $('#spesifay').addClass("hidden");
+
+
                 });
                 $("[data-toggle=tooltip]").tooltip();
 
             }
         });
-    });
-
-    $('.amount-money').on('keyup', function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $("#Rent").click(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $("#Groceries").click(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $("#Property").click(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $("#Recreation").click(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $("#Technology").click(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $("#user_countries_option").change(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $('#select2').change(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
-    });
-    $('#select1').change(function () {
-        if (flag_reset == 1) {
-            $('#submiting').trigger('click');
-            flag_reset = 0;
-        }
     });
 });
