@@ -21,8 +21,8 @@ $.getJSON("countries_curency.json", function (data) {
 $.getJSON("City.json", function (data) {
     city = data;
 });
-var flag_reset = 0;
 var pp_rezult;
+var res_am=0;
 $(document).ready(function () {
 
     var user_coutries_data = {};
@@ -59,11 +59,6 @@ $(document).ready(function () {
             country1 = $(element).children("option[selected=selected]").val(); //This is the correct value
 
             console.log("This is the selected country code: " + country1);
-
-            if (flag_reset == 1) {
-                $('#submiting').trigger('click');
-                flag_reset = 0;
-            }
 
             contry_city1 = countries[country1];
 
@@ -106,11 +101,6 @@ $(document).ready(function () {
             console.log("This is the selected country code: " + country2);
             contry_city2 = countries[country2];
 
-            if (flag_reset == 1) {
-                $('#submiting').trigger('click');
-                flag_reset = 0;
-            }
-
             $("#select2").html(" <option>No city, use national average</option>");
             $.each(city, function (key, val) {
                 if (val['Country'] == contry_city2) {
@@ -145,6 +135,7 @@ $(document).ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault();
+        var currency_symbol = '';
         $('#text_result').addClass('hidden');
         $('#text_after').addClass('hidden');
         $('#select1').val('No city, use national average');
@@ -181,8 +172,7 @@ $(document).ready(function () {
                 var response = jQuery.parseJSON(json);
                 if (response.status == '1') {
 
-                    var currency_symbol = '',
-                        currency1_name = cur1,
+                    var currency1_name = cur1,
                         currency2_name = cur2;
 
                     if (currencies[cur1]) {
@@ -213,7 +203,7 @@ $(document).ready(function () {
                     if ($('#select1').val() == 'No city, use national average') {
                         if ($('#select2').val() == 'No city, use national average') {
                             if ($("#Rent").prop("checked") != true && $("#Groceries").prop("checked") != true && $("#Property").prop("checked") != true && $("#Recreation").prop("checked") != true && $("#Technology").prop("checked") != true) {
-                                alert("No city, use national average!!!");
+                               // alert("No city, use national average!!!");
                             }
                         }
                         else {
@@ -292,36 +282,55 @@ $(document).ready(function () {
                         groceries_flag = 1;
                     }
 
-                    var cked_res;
+                    var cked_res,type_mes=" not selected ";
                     if (groceries_flag == 1 && recreation_flag == 1 && rent_flag == 1) {
                         cked_res = (groceries + recreation + rent) / 3;
+                        type_mes=" Rent, Gastro/Recreation and Groceries ";
                     } else if (groceries_flag == 1 && recreation_flag == 1 && rent_flag == 0) {
+                        type_mes=" Gastro/Recreation and Groceries ";
                         cked_res = (groceries + recreation) / 2;
                     } else if (groceries_flag == 1 && recreation_flag == 0 && rent_flag == 1) {
+                        type_mes=" Rent and Groceries ";
                         cked_res = (groceries + rent) / 2;
                     } else if (groceries_flag == 0 && recreation_flag == 1 && rent_flag == 1) {
+                        type_mes="Rent and Gastro/Recreation ";
                         cked_res = (recreation + rent) / 2;
                     } else if (groceries_flag == 0 && recreation_flag == 0 && rent_flag == 1) {
+                        type_mes=" Rent ";
                         cked_res = rent;
                     } else if (groceries_flag == 0 && recreation_flag == 1 && rent_flag == 0) {
+                        type_mes=" Gastro/Recreation ";
                         cked_res = recreation;
                     } else if (groceries_flag == 1 && recreation_flag == 0 && rent_flag == 0) {
+                        type_mes=" Groceries ";
+
                         cked_res = groceries;
                     }
 
                     if ($("#Rent").prop("checked") == true || $("#Groceries").prop("checked") == true || $("#Recreation").prop("checked") == true) {
-                        $('.koef-ppp').html(cked_res.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                        $('.koef-ppp').html(cked_res.toFixed(2) + "  " + currencies[countries_curency[country1]]["symbol"]  + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     else {
                         console.log(result);
-                        $('.koef-ppp').html(result.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                        $('.koef-ppp').html(result.toFixed(2) + "  " + currencies[countries_curency[country1]]["symbol"]  + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     $("[data-toggle=tooltip]").tooltip();
-                    $('#text_result').html("<p><b>This is a weighed result, taking into account the expense types " +  currencies[cur1]["symbol"] + ", " + currencies[cur2]["symbol"] + " and " + amount + " as well as the </b></p>"+
+                    $('#text_result').html("<p><b>This is a weighed result, taking into account the expense types " + type_mes + " as well as the </b></p>"+
                         "<p><b>local price indices of "+$('#select1').val()+" and "+$('#select2').val()+".<br> </b></p><p><b>For more info, please slide over the question mark in the result box.</b></p>");
                     $('#text_result').removeClass('hidden');
-                    $('#spesifay').addClass("hidden");
 
+                    // $('#spesifay').addClass("hidden");
+                    res_am++;
+                    if (res_am>1){
+                        $('#am_rez').removeClass("hidden");
+                    }
+                   /* $('#select1').val('No city, use national average');
+                    $('#select2').val('No city, use national average');
+                    $("#Rent").prop("checked", false);
+                    $("#Recreation").prop("checked", false);
+                    $("#Property").prop("checked", false);
+                    $("#Groceries").prop("checked", false);
+                    $("#Technology").prop("checked", false);*/
 
                 });
                 $("[data-toggle=tooltip]").tooltip();
