@@ -22,7 +22,7 @@ $.getJSON("City.json", function (data) {
     city = data;
 });
 var pp_rezult;
-var res_am=0;
+var res_am = 0;
 $(document).ready(function () {
 
     var user_coutries_data = {};
@@ -197,144 +197,136 @@ $(document).ready(function () {
                     $('#resultMessage').html(response.result);
                     console.log(response.result);
                 }
+                var optim_iac_moj;
+                var select0 = $('#select1');
 
-                var result;
-                $('#go').click(function () {
-                    if ($('#select1').val() == 'No city, use national average') {
-                        if ($('#select2').val() == 'No city, use national average') {
-                            if ($("#Rent").prop("checked") != true && $("#Groceries").prop("checked") != true && $("#Property").prop("checked") != true && $("#Recreation").prop("checked") != true && $("#Technology").prop("checked") != true) {
-                               // alert("No city, use national average!!!");
+
+                select0.change(function () {
+                    var a = country[contry_city1]['Cost of Living Plus Rent Index'] / city[select0.val()]['Cost of Living Plus Rent Index'] * amount;
+                    $.ajax({
+                        url: 'calc.php',
+                        data: {
+                            currency1: cur1,
+                            user_country_ppp: country1,
+                            currency2: cur2,
+                            interest_country_ppp: country2,
+                            amount: a.toFixed(2)
+                        },
+                        type: 'POST',
+                        success: function (json) {
+                            var response1 = jQuery.parseJSON(json);
+                            if (response1.status == '1') {
+                                optim_iac_moj = parseFloat(response1.result);
                             }
                         }
-                        else {
-                            result = country[contry_city2]['Cost of Living Plus Rent Index'] / city[$('#select2').val()]['Cost of Living Plus Rent Index'] * pp_rezult;
+                    });
+                });
+
+                var result, mes_cur;
+
+                $('#go').click(function () {
+                    var select1 = select0.val(),
+                        select2 = $('#select2').val(),
+                        rent_select = $("#Rent").prop("checked"),
+                        groceries_select = $("#Groceries").prop("checked"),
+                        recreation_select = $("#Recreation").prop("checked");
+
+                    if (select1 == 'No city, use national average') {
+                        if (select2 != 'No city, use national average') {
+                            result = country[contry_city2]['Cost of Living Plus Rent Index'] / city[select2]['Cost of Living Plus Rent Index'] * pp_rezult;
+                            mes_cur = select2;
                         }
                     }
                     else {
-                        if ($('#select2').val() == 'No city, use national average') {
-                            var a = country[contry_city1]['Cost of Living Plus Rent Index'] / city[$('#select1').val()]['Cost of Living Plus Rent Index'] * amount;
-
-                            $.ajax({
-                                url: 'calc.php',
-                                data: {
-                                    currency1: cur1,
-                                    user_country_ppp: country1,
-                                    currency2: cur2,
-                                    interest_country_ppp: country2,
-                                    amount: a.toFixed(2)
-                                },
-                                type: 'POST',
-                                success: function (json) {
-                                    var response1 = jQuery.parseJSON(json);
-                                    if (response1.status == '1') {
-                                        result = response1.result * 1.00000000000001;
-                                    }
-                                }
-                            });
-
+                        if (select2 == 'No city, use national average') {
+                            mes_cur = select1;
+                            result = optim_iac_moj;
                         } else {
-                            var a = country[contry_city1]['Cost of Living Plus Rent Index'] / city[$('#select1').val()]['Cost of Living Plus Rent Index'] * amount;
-                            var b;
-                            $.ajax({
-                                url: 'calc.php',
-                                data: {
-                                    currency1: cur1,
-                                    user_country_ppp: country1,
-                                    currency2: cur2,
-                                    interest_country_ppp: country2,
-                                    amount: a.toFixed(2)
-                                },
-                                type: 'POST',
-                                success: function (json) {
-                                    var response2 = jQuery.parseJSON(json);
-                                    if (response2.status == '1') {
-                                        b = response2.result;
-                                        result = country[contry_city2]['Cost of Living Plus Rent Index'] / city[$('#select2').val()]['Cost of Living Plus Rent Index'] * b;
-                                    }
-                                }
-                            });
+                            result = country[contry_city2]['Cost of Living Plus Rent Index'] / city[select2]['Cost of Living Plus Rent Index'] * optim_iac_moj;
+                            mes_cur = select1 + " and " + select2;
                         }
-
                     }
-                    var rent, recreation, groceries, rent_flag = 0, recreation_flag = 0, groceries_flag = 0;
-                    if ($("#Rent").prop("checked") == true) {
-                        if ($('#select2').val() == 'No city, use national average') {
+                    var rent, recreation, groceries;
+                    if (rent_select == true) {
+                        if (select2 == 'No city, use national average') {
                             rent = country[contry_city2]['Rent Index'] / country[contry_city2]['Cost of Living Plus Rent Index'] * pp_rezult;
                         } else {
-                            rent = city[$('#select2').val()]['Rent Index'] / city[$('#select2').val()]['Cost of Living Plus Rent Index'] * result;
+                            rent = city[select2]['Rent Index'] / city[select2]['Cost of Living Plus Rent Index'] * result;
                         }
-                        rent_flag = 1;
                     }
-                    if ($("#Recreation").prop("checked") == true) {
-                        if ($('#select2').val() == 'No city, use national average') {
+                    if (recreation_select == true) {
+                        if (select2 == 'No city, use national average') {
                             recreation = country[contry_city2]['Restaurant Price Index'] / country[contry_city2]['Cost of Living Plus Rent Index'] * pp_rezult;
                         } else {
-                            recreation = city[$('#select2').val()]['Restaurant Price Index'] / city[$('#select2').val()]['Cost of Living Plus Rent Index'] * result;
+                            recreation = city[select2]['Restaurant Price Index'] / city[select2]['Cost of Living Plus Rent Index'] * result;
                         }
-                        recreation_flag = 1;
                     }
-                    if ($("#Groceries").prop("checked") == true) {
-                        if ($('#select2').val() == 'No city, use national average') {
+                    if (groceries_select == true) {
+                        if (select2 == 'No city, use national average') {
                             groceries = country[contry_city2]['Groceries Index'] / country[contry_city2]['Cost of Living Plus Rent Index'] * pp_rezult;
                         } else {
-                            groceries = city[$('#select2').val()]['Groceries Index'] / city[$('#select2').val()]['Cost of Living Plus Rent Index'] * result;
+                            groceries = city[select2]['Groceries Index'] / city[select2]['Cost of Living Plus Rent Index'] * result;
                         }
-                        groceries_flag = 1;
                     }
 
-                    var cked_res,type_mes=" not selected ";
-                    if (groceries_flag == 1 && recreation_flag == 1 && rent_flag == 1) {
-                        cked_res = (groceries + recreation + rent) / 3;
-                        type_mes=" Rent, Gastro/Recreation and Groceries ";
-                    } else if (groceries_flag == 1 && recreation_flag == 1 && rent_flag == 0) {
-                        type_mes=" Gastro/Recreation and Groceries ";
-                        cked_res = (groceries + recreation) / 2;
-                    } else if (groceries_flag == 1 && recreation_flag == 0 && rent_flag == 1) {
-                        type_mes=" Rent and Groceries ";
-                        cked_res = (groceries + rent) / 2;
-                    } else if (groceries_flag == 0 && recreation_flag == 1 && rent_flag == 1) {
-                        type_mes="Rent and Gastro/Recreation ";
-                        cked_res = (recreation + rent) / 2;
-                    } else if (groceries_flag == 0 && recreation_flag == 0 && rent_flag == 1) {
-                        type_mes=" Rent ";
-                        cked_res = rent;
-                    } else if (groceries_flag == 0 && recreation_flag == 1 && rent_flag == 0) {
-                        type_mes=" Gastro/Recreation ";
-                        cked_res = recreation;
-                    } else if (groceries_flag == 1 && recreation_flag == 0 && rent_flag == 0) {
-                        type_mes=" Groceries ";
-
-                        cked_res = groceries;
+                    var cked_res = 0, type_mes, index = 0;
+                    if (groceries != undefined) {
+                        cked_res += groceries;
+                        index++;
+                        type_mes = " Groceries";
                     }
-
-                    if ($("#Rent").prop("checked") == true || $("#Groceries").prop("checked") == true || $("#Recreation").prop("checked") == true) {
-                        $('.koef-ppp').html(cked_res.toFixed(2) + "  " + currencies[countries_curency[country1]]["symbol"]  + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                    if (recreation != undefined) {
+                        cked_res += recreation;
+                        index++;
+                        if (type_mes == undefined) {
+                            type_mes = " Gastro/Recreation ";
+                        } else if (rent == undefined) {
+                            type_mes = " Groceries and Gastro/Recreation";
+                        }
+                    }
+                    if (rent != undefined) {
+                        cked_res += rent;
+                        index++;
+                        if (type_mes == undefined) {
+                            type_mes = " Rent ";
+                        } else if (groceries != undefined && recreation != undefined) {
+                            type_mes += ", Gastro/Recreation and Rent ";
+                        } else {
+                            type_mes += " and Rent ";
+                        }
+                    }
+                    if (index > 1) {
+                        cked_res /= index;
+                    }
+                    if (rent_select == true || groceries_select == true || recreation_select == true) {
+                        $('.koef-ppp').html(cked_res.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     else {
-                        console.log(result);
-                        $('.koef-ppp').html(result.toFixed(2) + "  " + currencies[countries_curency[country1]]["symbol"]  + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
+                        $('.koef-ppp').html(result.toFixed(2) + "  " + currency_symbol + "<a href=\"#\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" title=\"We use the Cost of Living Index of <br> numbeo.com to weigh the result by <br>expensetypesand cityes \"><b>?</b></a>");
                     }
                     $("[data-toggle=tooltip]").tooltip();
-                    $('#text_result').html("<p><b>This is a weighed result, taking into account the expense types " + type_mes + " as well as the </b></p>"+
-                        "<p><b>local price indices of "+$('#select1').val()+" and "+$('#select2').val()+".<br> </b></p><p><b>For more info, please slide over the question mark in the result box.</b></p>");
-                    $('#text_result').removeClass('hidden');
-
-                    // $('#spesifay').addClass("hidden");
+                    var last_mesag = "";
+                    if (type_mes != undefined) {
+                        if (select2 != 'No city, use national average' || select1 != 'No city, use national average') {
+                            last_mesag = "<p><b>This is a weighed result, taking into account the expense types " + type_mes + " as well as the </b></p>";
+                        } else {
+                            last_mesag = "<p><b>This is a weighed result, taking into account the expense types " + type_mes + "</b> </p>";
+                        }
+                    }
+                    if (mes_cur != undefined) {
+                        last_mesag += "<p><b>local price indices of " + mes_cur + ".<br> </b></p><p><b>For more info, please slide over the question mark in the result box.</b></p>"
+                    }
+                    else {
+                        last_mesag += "<p><b>For more info, please slide over the question mark in the result box.</b></p>"
+                    }
+                    $('#text_result').html(last_mesag).removeClass('hidden');
+                    mes_cur = undefined;
                     res_am++;
-                    if (res_am>1){
+                    if (res_am == 2) {
                         $('#am_rez').removeClass("hidden");
                     }
-                   /* $('#select1').val('No city, use national average');
-                    $('#select2').val('No city, use national average');
-                    $("#Rent").prop("checked", false);
-                    $("#Recreation").prop("checked", false);
-                    $("#Property").prop("checked", false);
-                    $("#Groceries").prop("checked", false);
-                    $("#Technology").prop("checked", false);*/
-
                 });
                 $("[data-toggle=tooltip]").tooltip();
-
             }
         });
     });
